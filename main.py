@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-url='http://47.144.126.180:8000/message?q='
+url='https://47.144.126.180:8000/message?q='
 
 with st.sidebar:
     apikey = st.text_input("Intelity API Key", key="apikey", type="password")
@@ -26,7 +26,7 @@ if prompt:
         }
         url = url + apikey
 
-        response = requests.post(url, json=data)
+        response = requests.post(url, json=data, verify=False )
         if response.status_code == 401:
             st.markdown("apikey is not registered")
             st.session_state.messages.append({"role": "assistant", "content": "apikey is not registered"})
